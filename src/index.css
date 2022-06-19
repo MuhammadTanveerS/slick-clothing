@@ -18,3 +18,15 @@ a {
 *{
   box-sizing: border-box;
 }
+
+.signUp-container{
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  
+}
+
+.signUp-container h2 {
+  margin: 10px 0;
+}
+
