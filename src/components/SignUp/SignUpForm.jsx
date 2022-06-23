@@ -1,4 +1,5 @@
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
+import { UserContext } from '../../context/UserContext';
 import { createAuthUserFromEmailAndPass, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
 import Button from '../Button/Button';
 
@@ -15,6 +16,8 @@ const SignUpForm = () => {
     const [formFields, setFormFields] = useState(fields);
 
     const {displayName,email,password,confrimPassword} = formFields;
+
+    const {setCurrentUser} = useContext(UserContext);
 
     const handleChange = (e) => {
         const{name,value} = e.target;
@@ -35,6 +38,7 @@ const SignUpForm = () => {
         
         try {
             const {user} = await createAuthUserFromEmailAndPass(email,password);
+            setCurrentUser(user);
             await createUserDocumentFromAuth(user,{displayName});
              console.log(user);
              resetFields();
